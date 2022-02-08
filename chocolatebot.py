@@ -6,8 +6,8 @@ import json
 
 warns = {}
 
-with open("./warns.json", "r") as file:
-    if file:
+if os.exists("./warns.json"):
+    with open("./warns.json", "r") as file:
         warns = json.load(file)
 
 bot = discord.ext.commands.Bot("c!")
