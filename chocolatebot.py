@@ -30,4 +30,10 @@ async def warn(uid: discord.Member):
         return
     warns[uid] = 1
 
+@bot.event
+async def on_disconnect():
+    global warns
+    with open("./warns.json", "w") as file:
+        json.dump(warns, file)
+
 bot.run(os.getenv("DISCORD_TOKEN"))
