@@ -21,7 +21,7 @@ async def on_message(message):
 
 @bot.command()        
 async def warn(ctx, uid: discord.Member):
-    _warn(uid)
+    await _warn(uid)
 
 async def _warn(uid: discord.Member):
     global warns
