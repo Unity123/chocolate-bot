@@ -6,7 +6,7 @@ import json
 
 warns = {}
 
-if os.exists("./warns.json"):
+if os.path.exists("./warns.json"):
     with open("./warns.json", "r") as file:
         warns = json.load(file)
 
