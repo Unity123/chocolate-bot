@@ -52,7 +52,7 @@ async def _warn(uid: discord.Member, reason):
     global warns
     if uid in warns:
         warns[uid] += 1
-            return
+        return
     else:
         warns[uid] = 1
     await uid.send("You have been warned.\nReason: " + reason + "\nYour warns: " + str(warns[uid]))
@@ -67,9 +67,4 @@ async def on_disconnect():
     with open("./warns.json", "w") as file:
         json.dump(warns, file)
 
-@bot.event
-async def on_ready():
-    jeff = await bot.get_channel(906297627904192594).webhooks()
-    jeff[0].delete()
-
-bot.run(os.getenv("DISCORD_TOKEN")))
+bot.run(os.getenv("DISCORD_TOKEN"))
