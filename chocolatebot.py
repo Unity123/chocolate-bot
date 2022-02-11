@@ -25,25 +25,26 @@ async def on_message(message):
 @bot.command()
 @discord.ext.commands.has_permissions(kick_members=True)
 async def warn(ctx, uid: discord.Member, reason="None"):
-    await ctx.send("Warned " + uid.nickname + " for reason " + reason)
+    await ctx.send("Warned " + uid.display_name + " for reason " + reason)
     await _warn(uid, str(reason))
 
 @bot.command()
 @discord.ext.commands.has_permissions(kick_members=True)
 async def kick(ctx, uid: discord.Member, reason="None"):
-    await ctx.send("Kicked " + uid.nickname + " for reason " + str(reason))
+    await ctx.send("Kicked " + uid.display_name + " for reason " + str(reason))
     await uid.send("You have been kicked from " + ctx.guild.name + ".\nReason: " + reason)
     await uid.kick()
 
 @bot.command()
 @discord.ext.commands.has_permissions(ban_members=True)
 async def ban(ctx, uid: discord.Member, reason="None"):
-    await ctx.send("Banned " + uid.nickname + " for reason " + str(reason))
+    await ctx.send("Banned " + uid.display_name + " for reason " + str(reason))
     await uid.send("You have been banned from " + ctx.guild.name + ".\nReason: " + reason)
     await uid.ban()
 
 @warn.error
 @kick.error
+@ban.error
 async def error(error, ctx):
     if isinstance(error, discord.ext.commands.MissingPermissions):
         await ctx.send("You don't have the permissions to do that!")
