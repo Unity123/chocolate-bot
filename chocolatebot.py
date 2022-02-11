@@ -15,7 +15,7 @@ bot = discord.ext.commands.Bot("c!")
 @bot.listen()
 async def on_message(message):
     if profanity.contains_profanity(message.content):
-        hook = await message.channel.create_webhook(name=message.author.nickname, avatar=message.author.avatar)
+        hook = await message.channel.create_webhook(name=message.author.display_name, avatar=message.author.avatar)
         await hook.send(profanity.censor(message.content, "#"))
         await message.delete() #message.edit(content=profanity.censor(message.content))
         await message.channel.send("Don't swear, " + message.author.mention + "! You have been warned.")
@@ -56,7 +56,7 @@ async def _warn(uid: discord.Member, reason):
         return
     else:
         warns[uid] = 1
-    await uid.send("You have been warned.\nReason: " + reason + "\nYour warns: " + str(warns[uid]))
+    await uid.send("You have been warned in " + uid.guild.name + "\nReason: " + reason + "\nYour warns: " + str(warns[uid]))
     if warns[uid] == 7:
         await uid.send("You have been banned from " + uid.guild.name + ".\nReason: Too many warns.")
         warns[uid] = 0
